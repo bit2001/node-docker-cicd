@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send("Hello GitHub Actions + Docker + VM Deploy! v3 tag ");
+  res.send("Hello GitHub Actions + Docker + VM Deploy! v4 tag ");
 });
 
 app.listen(3000, () => {
