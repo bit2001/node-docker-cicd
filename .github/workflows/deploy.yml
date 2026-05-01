@@ -1,11 +1,11 @@
-name: Build and Deploy Docker Image
+name: Build Docker Image
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,19 +24,3 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-docker-cicd:latest
-
-      - name: Deploy to VM
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.VM_HOST }}
-          username: ${{ secrets.VM_USERNAME }}
-          key: ${{ secrets.VM_SSH_KEY }}
-          script: |
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/node-docker-cicd:latest
-            docker stop node-app || true
-            docker rm node-app || true
-            docker run -d \
-              --name node-app \
-              -p 8080:3000 \
-              --restart unless-stopped \
-              ${{ secrets.DOCKERHUB_USERNAME }}/node-docker-cicd:latest
