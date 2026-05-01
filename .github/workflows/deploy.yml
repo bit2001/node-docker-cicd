@@ -23,4 +23,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-docker-cicd:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-docker-cicd:v1.0
